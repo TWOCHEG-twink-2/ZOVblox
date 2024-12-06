@@ -4,58 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZOVblox</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            scroll-behavior: smooth; /* Плавная прокрутка */
-        }
-
-        header {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #333;
-            color: #fff;
-            font-size: 2rem;
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
-
-        main {
-            position: relative;
-        }
-
-        section {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        section.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        footer {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #222;
-            color: #fff;
-            font-size: 1rem;
-        }
-    </style>
     <script>
         async function loadMarkdown(sectionId, filePath) {
             try {
@@ -72,42 +20,106 @@
             }
         }
 
-        function handleScroll() {
-            const sections = document.querySelectorAll("section");
-            const windowHeight = window.innerHeight;
-
-            sections.forEach((section) => {
-                const sectionTop = section.getBoundingClientRect().top;
-                const sectionBottom = section.getBoundingClientRect().bottom;
-
-                if (sectionTop < windowHeight / 2 && sectionBottom > windowHeight / 2) {
-                    section.classList.add("active");
-                } else {
-                    section.classList.remove("active");
-                }
-            });
-        }
-
         document.addEventListener("DOMContentLoaded", () => {
-            // Загрузка содержимого Markdown
-            loadMarkdown('section1', 'content/section1.md');
-            loadMarkdown('section2', 'content/section2.md');
-            loadMarkdown('section3', 'content/section3.md');
-            loadMarkdown('section4', 'content/section4.md');
-            loadMarkdown('section5', 'content/section5.md');
-
-            // Обработка прокрутки
-            window.addEventListener("scroll", handleScroll);
-
-            // Инициализация первой секции
-            handleScroll();
+            loadMarkdown('section1', 'assets/content/section1.md');
+            loadMarkdown('section2', 'assets/content/section2.md');
+            loadMarkdown('section3', 'assets/content/section3.md');
+            loadMarkdown('section4', 'assets/content/section4.md');
+            loadMarkdown('section5', 'assets/content/section5.md');
         });
     </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            position: relative;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        header h1 {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Тень для текста */
+            position: relative;
+            z-index: 2;
+            font-size: 2.5rem;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header p {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Тень для текста */
+            position: relative;
+            z-index: 2;
+            font-size: 1.5rem;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px; /* Высота платформы */
+            background: url('assets/img/banner.PNG') no-repeat center; /* Замените путь на ваш */
+            background-size: cover;
+            z-index: 1;
+            transform: translateY(0);
+            animation: float 5s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px); /* Легкое движение вверх */
+            }
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        section {
+            background-color: rgba(255, 255, 255, 0.9); /* Полупрозрачный белый */
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            padding: 20px;
+            width: 90%; /* Занимает почти всю ширину */
+            max-width: 800px; /* Ограничение ширины */
+            box-sizing: border-box;
+        }
+
+        section:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон */
+            color: white;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>ZOVblox</h1>
-        наш конкурент Roblox
+        <p>наш конкурент Roblox</p>
     </header>
 
     <main>
@@ -127,9 +139,8 @@
             <div>Загрузка содержимого...</div>
         </section>
     </main>
-    <footer>
-        <p>© 2024 ZOVblox</p>
-    </footer>
+
+    {% include 'footer.html' %}
 
     <!-- Подключение библиотеки для парсинга Markdown -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
