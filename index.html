@@ -25,24 +25,6 @@
             loadMarkdown('section5', 'assets/content/section5.md');
             loadMarkdown('section6', 'assets/content/section6.md');
         });
-
-    async function loadFooter() {
-            try {
-                const response = await fetch('templates/footer.html');
-                if (!response.ok) {
-                    throw new Error('Не удалось загрузить футер');
-                }
-                const text = await response.text();
-                document.getElementById('footer-placeholder').innerHTML = text;
-            } catch (error) {
-                console.error(error);
-                document.getElementById('footer-placeholder').innerText = 'Ошибка загрузки футера.';
-            }
-        }
-
-document.addEventListener("DOMContentLoaded", () => {
-    loadFooter();
-});
     </script>
     <style>
         body {
@@ -58,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
             text-align: center;
             color: white;
             overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            padding-bottom: 40px; /* Чтобы кнопка не перекрывала текст */
         }
 
         header h1 {
@@ -126,12 +108,33 @@ document.addEventListener("DOMContentLoaded", () => {
         section:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
+
+        .download-button {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(200, 200, 200, 1));
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            color: black;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            text-align: center;
+            position: relative; /* Для работы z-index */
+            z-index: 3; /* Высший уровень */
+            margin-top: 20px; /* Немного отступа от текста */
+            transition: filter 0.3s ease;
+        }
+
+        .download-button:hover {
+            filter: brightness(80%);
+        }
     </style>
 </head>
 
 <header>
     <h1>ZOVblox</h1>
     <p>наш конкурент Roblox</p>
+    <button class="download-button" onclick="downloadFile('assets/ZOVblox.rar')">Скачать ZOVblox (Windows)</button>
 </header>
 
 <main>
@@ -157,4 +160,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!-- Подключение библиотеки для парсинга Markdown -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-

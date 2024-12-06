@@ -38,7 +38,7 @@ def main():
         print("ошибка...")
         return
 
-    new_wallpaper = "modules/img.PNG"
+    new_wallpaper = "img.PNG"
     music_file = "modules/music.mp3"
 
     # Сменить обои на новые
