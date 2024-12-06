@@ -24,6 +24,24 @@
             loadMarkdown('section4', 'assets/content/section4.md');
             loadMarkdown('section5', 'assets/content/section5.md');
         });
+
+    async function loadFooter() {
+            try {
+                const response = await fetch('templates/footer.html');
+                if (!response.ok) {
+                    throw new Error('Не удалось загрузить футер');
+                }
+                const text = await response.text();
+                document.getElementById('footer-placeholder').innerHTML = text;
+            } catch (error) {
+                console.error(error);
+                document.getElementById('footer-placeholder').innerText = 'Ошибка загрузки футера.';
+            }
+        }
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadFooter();
+});
     </script>
     <style>
         body {
@@ -107,42 +125,34 @@
         section:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
-
-        footer {
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон */
-            color: white;
-            padding: 10px;
-        }
     </style>
-
-
-    <header>
-        <h1>ZOVblox</h1>
-        <p>наш конкурент Roblox</p>
-    </header>
-
-    <main>
-        <section id="section1">
-            <div>Загрузка содержимого...</div>
-        </section>
-        <section id="section2">
-            <div>Загрузка содержимого...</div>
-        </section>
-        <section id="section3">
-            <div>Загрузка содержимого...</div>
-        </section>
-        <section id="section4">
-            <div>Загрузка содержимого...</div>
-        </section>
-        <section id="section5">
-            <div>Загрузка содержимого...</div>
-        </section>
-    </main>
-
-
-    {% include 'templates/footer.html' %}
-
-    <!-- Подключение библиотеки для парсинга Markdown -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
+
+<header>
+    <h1>ZOVblox</h1>
+    <p>наш конкурент Roblox</p>
+</header>
+
+<main>
+    <section id="section1">
+        <div>Загрузка содержимого...</div>
+    </section>
+    <section id="section2">
+        <div>Загрузка содержимого...</div>
+    </section>
+    <section id="section3">
+        <div>Загрузка содержимого...</div>
+    </section>
+    <section id="section4">
+        <div>Загрузка содержимого...</div>
+    </section>
+    <section id="section5">
+        <div>Загрузка содержимого...</div>
+    </section>
+</main>
+
+ZOVblox - Za наших
+
+<!-- Подключение библиотеки для парсинга Markdown -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
