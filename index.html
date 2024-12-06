@@ -8,7 +8,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            overflow: hidden; /* Исключает боковую прокрутку */
+            scroll-behavior: smooth; /* Плавная прокрутка */
         }
 
         header {
@@ -20,6 +20,9 @@
             color: #fff;
             font-size: 2rem;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
         }
 
         main {
@@ -34,8 +37,8 @@
             font-size: 1.5rem;
             text-align: center;
             opacity: 0;
-            transform: translateY(100px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         section.active {
@@ -72,14 +75,12 @@
         function handleScroll() {
             const sections = document.querySelectorAll("section");
             const windowHeight = window.innerHeight;
-            const scrollPosition = window.scrollY;
 
-            sections.forEach((section, index) => {
-                const sectionTop = section.offsetTop;
-                if (
-                    scrollPosition >= sectionTop - windowHeight / 2 &&
-                    scrollPosition < sectionTop + section.offsetHeight - windowHeight / 2
-                ) {
+            sections.forEach((section) => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const sectionBottom = section.getBoundingClientRect().bottom;
+
+                if (sectionTop < windowHeight / 2 && sectionBottom > windowHeight / 2) {
                     section.classList.add("active");
                 } else {
                     section.classList.remove("active");
@@ -97,6 +98,9 @@
 
             // Обработка прокрутки
             window.addEventListener("scroll", handleScroll);
+
+            // Инициализация первой секции
+            handleScroll();
         });
     </script>
 </head>
