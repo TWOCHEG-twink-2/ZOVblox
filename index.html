@@ -40,11 +40,11 @@
             text-align: center;
             color: white;
             overflow: hidden;
-            padding-bottom: 40px; /* Чтобы кнопка не перекрывала текст */
+            padding-bottom: 40px;
         }
 
         header h1 {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Тень для текста */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
             position: relative;
             z-index: 2;
             font-size: 2.5rem;
@@ -53,7 +53,7 @@
         }
 
         header p {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Тень для текста */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
             position: relative;
             z-index: 2;
             font-size: 1.5rem;
@@ -67,7 +67,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 200px; /* Высота платформы */
+            height: 200px;
             background: url('assets/img/banner.PNG') no-repeat center;
             background-size: cover;
             filter: blur(4px);
@@ -81,26 +81,47 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-10px); /* Легкое движение вверх */
+                transform: translateY(-10px);
             }
         }
 
         main {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-direction: row; /* Располагаем контейнеры по горизонтали */
+            justify-content: center; /* Выравниваем по центру */
+            gap: 20px; /* Пространство между колонками */
             padding: 20px;
+            flex-wrap: wrap; /* Контейнеры будут обтекать друг друга на маленьких экранах */
+        }
+
+        .content-column {
+            flex: 1; /* Контейнер растягивается */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрируем содержимое по горизонтали */
+            justify-content: center; /* Центрируем по вертикали */
+            min-width: 300px; /* Минимальная ширина для контейнера */
+            max-width: 800px; /* Максимальная ширина для контейнера */
+        }
+
+        .video-column {
+            flex: 1; /* Контейнер растягивается */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Центрируем содержимое по горизонтали */
+            justify-content: center; /* Центрируем по вертикали */
+            min-width: 300px; /* Минимальная ширина для контейнера */
+            max-width: 800px; /* Максимальная ширина для контейнера */
         }
 
         section {
-            background-color: rgba(0, 0, 0, 0.1); /* Полупрозрачный белый */
+            background-color: rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 10px 0;
             padding: 20px;
-            width: 90%; /* Занимает почти всю ширину */
-            max-width: 800px; /* Ограничение ширины */
+            width: 100%;
             box-sizing: border-box;
             transition: box-shadow 0.3s ease;
         }
@@ -119,14 +140,30 @@
             border: none;
             border-radius: 10px;
             text-align: center;
-            position: relative; /* Для работы z-index */
-            z-index: 3; /* Высший уровень */
-            margin-top: 400px; /* Немного отступа от текста */
+            position: relative;
+            z-index: 3;
+            margin-top: 40px;
             transition: filter 0.3s ease;
         }
 
         .download-button:hover {
             filter: brightness(80%);
+        }
+
+        .video-container {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 600px; /* Ограничиваем максимальную ширину видео */
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .video-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
         }
     </style>
 </head>
@@ -138,24 +175,36 @@
 </header>
 
 <main>
-    <section id="section1">
-        <div>Загрузка содержимого...</div>
-    </section>
-    <section id="section2">
-        <div>Загрузка содержимого...</div>
-    </section>
-    <section id="section3">
-        <div>Загрузка содержимого...</div>
-    </section>
-    <section id="section4">
-        <div>Загрузка содержимого...</div>
-    </section>
-    <section id="section5">
-        <div>Загрузка содержимого...</div>
-    </section>
-    <section id="section6">
-        <div>Загрузка содержимого...</div>
-    </section>
+    <div class="content-column">
+        <section id="section1">
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section2">
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section3">
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section4">
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section5">
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section6">
+            <div>Загрузка содержимого...</div>
+        </section>
+    </div>
+
+    <div class="video-column">
+        <div class="video-title">Видео 1</div>
+        <div class="video-container">
+            <video controls>
+                <source src="assets/video/video1.mp4" type="video/mp4">
+                Ваш браузер не поддерживает видео.
+            </video>
+        </div>
+    </div>
 </main>
 
 <!-- Подключение библиотеки для парсинга Markdown -->
