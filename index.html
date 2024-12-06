@@ -1,14 +1,65 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZOVblox</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Проектная страница</title>
+    <script>
+        async function loadMarkdown(sectionId, filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`Не удалось загрузить файл ${filePath}`);
+                }
+                const text = await response.text();
+                const markedContent = marked.parse(text); // Используется библиотека marked.js
+                document.getElementById(sectionId).innerHTML = markedContent;
+            } catch (error) {
+                console.error(error);
+                document.getElementById(sectionId).innerText = 'Ошибка загрузки содержимого.';
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadMarkdown('section1', 'content/section1.md');
+            loadMarkdown('section2', 'content/section2.md');
+            loadMarkdown('section3', 'content/section3.md');
+            loadMarkdown('section4', 'content/section4.md');
+            loadMarkdown('section5', 'content/section5.md');
+        });
+    </script>
 </head>
 <body>
-    <h1>ZOVBLOX</h1>
+    <header>
+        <h1>Проектная страница</h1>
+    </header>
+    <main>
+        <section id="section1">
+            <h2>Часть 1</h2>
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section2">
+            <h2>Часть 2</h2>
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section3">
+            <h2>Часть 3</h2>
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section4">
+            <h2>Часть 4</h2>
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section5">
+            <h2>Часть 5</h2>
+            <div>Загрузка содержимого...</div>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Проект</p>
+    </footer>
 
-    - в скором времени роблокс могут заблокировать мы представляем вам нашего конкурента роблоксу ZOVblox
+    <!-- Подключение библиотеки для парсинга Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </body>
 </html>
