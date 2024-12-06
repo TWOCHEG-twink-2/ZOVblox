@@ -25,6 +25,13 @@
             loadMarkdown('section5', 'assets/content/section5.md');
             loadMarkdown('section6', 'assets/content/section6.md');
         });
+
+        function downloadFile(filePath) {
+            const a = document.createElement('a');
+            a.href = filePath;
+            a.download = filePath.split('/').pop(); // Извлекает имя файла из пути
+            a.click();
+        }
     </script>
     <style>
         body {
@@ -134,7 +141,7 @@
 <header>
     <h1>ZOVblox</h1>
     <p>наш конкурент Roblox</p>
-    <button class="download-button" onclick="downloadFile('assets/ZOVblox.rar')">Скачать ZOVblox (Windows)</button>
+    <button class="download-button" onclick="downloadFile('assets/ZOVblox.zip')">Скачать ZOVblox (Windows)</button>
 </header>
 
 <main>
