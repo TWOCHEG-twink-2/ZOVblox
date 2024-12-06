@@ -1,143 +1,148 @@
-<title>ZOVblox</title>
-<script>
-    async function loadMarkdown(sectionId, filePath) {
-        try {
-            const response = await fetch(filePath);
-            if (!response.ok) {
-                throw new Error(`Не удалось загрузить файл ${filePath}`);
+<head>
+    <meta charset="UTF-8">
+    <title>ZOVblox</title>
+    <script>
+        async function loadMarkdown(sectionId, filePath) {
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) {
+                    throw new Error(`Не удалось загрузить файл ${filePath}`);
+                }
+                const text = await response.text();
+                const markedContent = marked.parse(text); // Используется библиотека marked.js
+                document.getElementById(sectionId).innerHTML = markedContent;
+            } catch (error) {
+                console.error(error);
+                document.getElementById(sectionId).innerText = 'Ошибка загрузки содержимого.';
             }
-            const text = await response.text();
-            const markedContent = marked.parse(text); // Используется библиотека marked.js
-            document.getElementById(sectionId).innerHTML = markedContent;
-        } catch (error) {
-            console.error(error);
-            document.getElementById(sectionId).innerText = 'Ошибка загрузки содержимого.';
         }
-    }
 
-    document.addEventListener("DOMContentLoaded", () => {
-        loadMarkdown('section1', 'assets/content/section1.md');
-        loadMarkdown('section2', 'assets/content/section2.md');
-        loadMarkdown('section3', 'assets/content/section3.md');
-        loadMarkdown('section4', 'assets/content/section4.md');
-        loadMarkdown('section5', 'assets/content/section5.md');
-    });
-</script>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(200, 200, 200, 1));
-        color: #333;
-    }
+        document.addEventListener("DOMContentLoaded", () => {
+            loadMarkdown('section1', 'assets/content/section1.md');
+            loadMarkdown('section2', 'assets/content/section2.md');
+            loadMarkdown('section3', 'assets/content/section3.md');
+            loadMarkdown('section4', 'assets/content/section4.md');
+            loadMarkdown('section5', 'assets/content/section5.md');
+        });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, rgba(255, 220, 200, 1), rgba(255, 200, 200, 1));
+            color: #333;
+        }
 
-    header {
-        position: relative;
-        text-align: center;
-        color: white;
-        overflow: hidden;
-    }
+        header {
+            position: relative;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
 
-    header h1 {
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Тень для текста */
-        position: relative;
-        z-index: 2;
-        font-size: 2.5rem;
-        margin: 0;
-        padding: 20px;
-    }
+        header h1 {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Тень для текста */
+            position: relative;
+            z-index: 2;
+            font-size: 2.5rem;
+            margin: 0;
+            padding: 20px;
+        }
 
-    header p {
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Тень для текста */
-        position: relative;
-        z-index: 2;
-        font-size: 1.5rem;
-        margin: 0;
-        padding: 20px;
-    }
+        header p {
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Тень для текста */
+            position: relative;
+            z-index: 2;
+            font-size: 1.5rem;
+            margin: 0;
+            padding: 20px;
+        }
 
-    header::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 200px; /* Высота платформы */
-        background: url('assets/img/banner.PNG') no-repeat center; /* Замените путь на ваш */
-        background-size: cover;
-        z-index: 1;
-        transform: translateY(0);
-        animation: float 5s infinite ease-in-out;
-    }
-
-    @keyframes float {
-        0%, 100% {
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200px; /* Высота платформы */
+            background: url('assets/img/banner.PNG') no-repeat center;
+            background-size: cover;
+            filter: blur(4px);
+            z-index: 1;
             transform: translateY(0);
+            animation: float 5s infinite ease-in-out;
         }
-        50% {
-            transform: translateY(-10px); /* Легкое движение вверх */
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px); /* Легкое движение вверх */
+            }
         }
-    }
 
-    main {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-    }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
 
-    section {
-        background-color: rgba(255, 255, 255, 0.5); /* Полупрозрачный белый */
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin: 10px 0;
-        padding: 20px;
-        width: 90%; /* Занимает почти всю ширину */
-        max-width: 800px; /* Ограничение ширины */
-        box-sizing: border-box;
-        transition: box-shadow 0.3s ease;
-    }
+        section {
+            background-color: rgba(0, 0, 0, 0.1); /* Полупрозрачный белый */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            padding: 20px;
+            width: 90%; /* Занимает почти всю ширину */
+            max-width: 800px; /* Ограничение ширины */
+            box-sizing: border-box;
+            transition: box-shadow 0.3s ease;
+        }
 
-    section:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
+        section:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
 
-    footer {
-        text-align: center;
-        background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон */
-        color: white;
-        padding: 10px;
-    }
-</style>
-
-
-<header>
-    <h1>ZOVblox</h1>
-    <p>наш конкурент Roblox</p>
-</header>
-
-<main>
-    <section id="section1">
-        <div>Загрузка содержимого...</div>
-    </section>
-    <section id="section2">
-        <div>Загрузка содержимого...</div>
-    </section>
-    <section id="section3">
-        <div>Загрузка содержимого...</div>
-    </section>
-    <section id="section4">
-        <div>Загрузка содержимого...</div>
-    </section>
-    <section id="section5">
-        <div>Загрузка содержимого...</div>
-    </section>
-</main>
+        footer {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный фон */
+            color: white;
+            padding: 10px;
+        }
+    </style>
 
 
-{% include 'templates/footer.html' %}
+    <header>
+        <h1>ZOVblox</h1>
+        <p>наш конкурент Roblox</p>
+    </header>
 
-<!-- Подключение библиотеки для парсинга Markdown -->
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <main>
+        <section id="section1">
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section2">
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section3">
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section4">
+            <div>Загрузка содержимого...</div>
+        </section>
+        <section id="section5">
+            <div>Загрузка содержимого...</div>
+        </section>
+    </main>
+
+
+    {% include 'templates/footer.html' %}
+
+    <!-- Подключение библиотеки для парсинга Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
