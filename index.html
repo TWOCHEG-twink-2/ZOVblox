@@ -4,6 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZOVblox</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Исключает боковую прокрутку */
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #333;
+            color: #fff;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        main {
+            position: relative;
+        }
+
+        section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        footer {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #222;
+            color: #fff;
+            font-size: 1rem;
+        }
+    </style>
     <script>
         async function loadMarkdown(sectionId, filePath) {
             try {
@@ -20,12 +69,34 @@
             }
         }
 
+        function handleScroll() {
+            const sections = document.querySelectorAll("section");
+            const windowHeight = window.innerHeight;
+            const scrollPosition = window.scrollY;
+
+            sections.forEach((section, index) => {
+                const sectionTop = section.offsetTop;
+                if (
+                    scrollPosition >= sectionTop - windowHeight / 2 &&
+                    scrollPosition < sectionTop + section.offsetHeight - windowHeight / 2
+                ) {
+                    section.classList.add("active");
+                } else {
+                    section.classList.remove("active");
+                }
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
+            // Загрузка содержимого Markdown
             loadMarkdown('section1', 'content/section1.md');
             loadMarkdown('section2', 'content/section2.md');
             loadMarkdown('section3', 'content/section3.md');
             loadMarkdown('section4', 'content/section4.md');
             loadMarkdown('section5', 'content/section5.md');
+
+            // Обработка прокрутки
+            window.addEventListener("scroll", handleScroll);
         });
     </script>
 </head>
@@ -35,26 +106,20 @@
         наш конкурент Roblox
     </header>
 
-    
     <main>
         <section id="section1">
-            <h2>что это за хрень?</h2>
             <div>Загрузка содержимого...</div>
         </section>
         <section id="section2">
-            <h2>превосходства</h2>
             <div>Загрузка содержимого...</div>
         </section>
         <section id="section3">
-            <h2>доступность доната</h2>
             <div>Загрузка содержимого...</div>
         </section>
         <section id="section4">
-            <h2>для разработчиков карт</h2>
             <div>Загрузка содержимого...</div>
         </section>
         <section id="section5">
-            <h2>остальное</h2>
             <div>Загрузка содержимого...</div>
         </section>
     </main>
