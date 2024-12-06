@@ -27,9 +27,11 @@
         });
 
         function downloadFile(filePath) {
+            console.log(`Пытаемся скачать файл с пути: ${filePath}`);
             const a = document.createElement('a');
             a.href = filePath;
             a.download = filePath.split('/').pop(); // Извлекает имя файла из пути
+            console.log(`Имя файла: ${a.download}`);
             a.click();
         }
     </script>
