@@ -109,19 +109,47 @@
             display: flex;
             flex-direction: column;
             align-items: center; /* Центрируем содержимое по горизонтали */
-            justify-content: center; /* Центрируем по вертикали */
+            justify-content: flex-start; /* Выравниваем видео в верхней части */
             min-width: 300px; /* Минимальная ширина для контейнера */
             max-width: 800px; /* Максимальная ширина для контейнера */
-        }
-
-        section {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 0, 0, 0.1); /* Платформа как у секций */
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin: 10px 0;
             padding: 20px;
+            box-sizing: border-box;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .video-column:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .video-container {
             width: 100%;
+            max-width: 600px; /* Ограничиваем максимальную ширину видео */
+            margin-bottom: 20px; /* Отступ от видео до следующего контента */
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .video-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        section {
+            background-color: rgba(0, 0, 0, 0.1); /* Платформа */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px 0;
+            padding: 20px;
+            width: 100%; /* Занимает всю ширину */
             box-sizing: border-box;
             transition: box-shadow 0.3s ease;
         }
@@ -148,22 +176,6 @@
 
         .download-button:hover {
             filter: brightness(80%);
-        }
-
-        .video-container {
-            margin-top: 20px;
-            width: 100%;
-            max-width: 600px; /* Ограничиваем максимальную ширину видео */
-        }
-
-        .video-container video {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        .video-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
         }
     </style>
 </head>
