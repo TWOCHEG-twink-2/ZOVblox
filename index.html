@@ -25,15 +25,6 @@
             loadMarkdown('section5', 'assets/content/section5.md');
             loadMarkdown('section6', 'assets/content/section6.md');
         });
-
-        function downloadFile(filePath) {
-            console.log(`Пытаемся скачать файл с пути: ${filePath}`);
-            const a = document.createElement('a');
-            a.href = filePath;
-            a.download = filePath.split('/').pop(); // Извлекает имя файла из пути
-            console.log(`Имя файла: ${a.download}`);
-            a.click();
-        }
     </script>
     <style>
         body {
@@ -67,7 +58,7 @@
             z-index: 2;
             font-size: 1.5rem;
             margin: 0;
-            padding: 20px;
+            padding-bottom: 40px;
         }
 
         header::after {
@@ -130,7 +121,7 @@
             text-align: center;
             position: relative; /* Для работы z-index */
             z-index: 3; /* Высший уровень */
-            margin-top: 20px; /* Немного отступа от текста */
+            margin-top: 400px; /* Немного отступа от текста */
             transition: filter 0.3s ease;
         }
 
