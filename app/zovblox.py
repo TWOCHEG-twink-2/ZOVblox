@@ -2,98 +2,114 @@ import os
 import sys
 import ctypes
 import pygame
-import tkinter as tk
-from tkinter import messagebox
+import customtkinter as ctk
 import tempfile
 import shutil
 import random
 
 
-# Функция для установки обоев
 def set_wallpaper(image_path):
-    # Windows API для изменения обоев
     ctypes.windll.user32.SystemParametersInfoW(20, 0, image_path, 3)
 
 
-# Функция для возврата обоев в исходное состояние
-def reset_wallpaper(original_wallpaper):
-    ctypes.windll.user32.SystemParametersInfoW(20, 0, original_wallpaper, 3)
+def reset_wallpaper(original_wallpaper=None):
+    default_wallpaper = os.path.expanduser("C:\\Windows\\Web\\Wallpaper\\Windows\\img0.jpg")
+    wallpaper_to_set = original_wallpaper if original_wallpaper and os.path.exists(original_wallpaper) else default_wallpaper
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, wallpaper_to_set, 3)
 
 
-# Функция для воспроизведения музыки в цикле
 def play_music(music_path):
     pygame.mixer.init()
     pygame.mixer.music.load(music_path)
-    pygame.mixer.music.play(-1)  # -1 означает зацикливание музыки
+    pygame.mixer.music.play(-1)
 
 
-# Функция для остановки музыки
 def stop_music():
     pygame.mixer.music.stop()
 
 
-# Функция для извлечения файлов из встроенного архива
 def extract_resource(file_name):
-    # Получаем путь к временной папке, где хранятся ресурсы при запуске .exe
     resource_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
     file_path = os.path.join(resource_path, file_name)
     return file_path
 
 
-# Функция для отображения окна с кнопкой
 def show_window():
-    root = tk.Tk()
-    root.title("ZOVblox")
+    # Настройка темы и цветовой схемы
+    ctk.set_appearance_mode("dark")  # Темная тема
+    ctk.set_default_color_theme("blue")  # Цветовая тема
 
-    # Настроим окно так, чтобы оно не было растягиваемым
-    root.geometry("600x200")
+    root = ctk.CTk()  # Создаем окно с использованием customtkinter
+    root.title("ZOVblox")
+    root.geometry("600x300")
     root.resizable(False, False)
 
-    # Добавим текст
-    label = tk.Label(root, text="ZOVblox к сожалению не готов\n(и некогда не будет)\nмогу предложить только это", font=("Arial", 12))
+    # Закругленные края окна
+    root.overrideredirect(True)  # Убираем стандартные кнопки управления окна
+    root.after(10, lambda: root.wm_attributes("-transparentcolor", "#2b2b2b"))
+    root.configure(bg="#2b2b2b")
+
+    # Основной контейнер
+    frame = ctk.CTkFrame(root, corner_radius=20, fg_color=("gray75", "gray30"))
+    frame.pack(padx=20, pady=20, fill="both", expand=True)
+
+    # Заголовок
+    label = ctk.CTkLabel(frame, text="ZOVblox к сожалению не готов\n(и некогда не будет)\nмогу предложить только это",
+                         font=ctk.CTkFont("Arial", size=16, weight="bold"))
     label.pack(pady=20)
 
-    # Кнопка для завершения
-    button = tk.Button(root, text="ну ладно(", font=("Arial", 12), command=root.quit)
-    button.pack(pady=10)
+    # Кнопка
+    button = ctk.CTkButton(frame, text="ну ладно(", command=root.quit, corner_radius=15)
+    button.pack(pady=20)
 
-    # Ожидание закрытия окна
+    # Градиентный фон для кнопки (дополнительно)
+    def gradient_button_hover(event):
+        button.configure(fg_color=("#1f6aa5", "#144a70"))  # Меняем цвет при наведении
+
+    def gradient_button_leave(event):
+        button.configure(fg_color=("#3a7ebf", "#1f6aa5"))  # Возвращаем исходный цвет
+
+    button.bind("<Enter>", gradient_button_hover)
+    button.bind("<Leave>", gradient_button_leave)
+
+    # Функция для закрытия окна при клике на любую часть окна
+    def on_close(event=None):
+        root.quit()
+
+    # Закрытие по нажатию на ESC
+    root.bind("<Escape>", on_close)
+
     root.mainloop()
 
 
-# Основная функция
 def main(image_filenames, music_filename):
-    # Случайный выбор изображения для обоев
     chosen_image_filename = random.choice(image_filenames)
 
-    # Извлекаем путь к встроенным файлам
     image_path = extract_resource(chosen_image_filename)
     music_path = extract_resource(music_filename)
 
-    # Сохраняем текущие обои
     original_wallpaper_path = os.path.expanduser("~\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper")
     original_wallpaper = None
     if os.path.exists(original_wallpaper_path):
-        # Сохраняем текущие обои, чтобы восстановить их позже
         original_wallpaper = tempfile.mktemp(suffix=".jpg")
         shutil.copy(original_wallpaper_path, original_wallpaper)
 
-    # Устанавливаем новые обои и начинаем воспроизведение музыки
     set_wallpaper(image_path)
     play_music(music_path)
 
-    # Показываем окно с кнопкой и ждем его закрытия
     show_window()
 
-    # После закрытия окна восстанавливаем старые обои и останавливаем музыку
-    if original_wallpaper:
-        reset_wallpaper(original_wallpaper)
+    reset_wallpaper(original_wallpaper)
     stop_music()
 
 
 if __name__ == "__main__":
-    # Укажите имена файлов с изображениями и музыкой, которые будут встраиваться в .exe
-    image_filenames = ["zov_1.PNG", "zov_2.jpg", "zov_3.jpg"]  # Имена файлов с изображениями
-    music_filename = "music.mp3"  # Имя файла с музыкой
+    image_filenames = ["zov_1.jpg", "zov_2.jpg", "zov_3.jpg", "zov_4.jpg"]
+    music_filename = "music.mp3"
 
     main(image_filenames, music_filename)
+
+# команда для создания exe
+# выполните в терминале проекта
+# pyinstaller --add-data "assets\img\zov_1.jpg;." --add-data "assets\img\zov_2.jpg;." --add-data "assets\img\zov_3.jpg;." --add-data "assets\img\zov_4.jpg;." --add-data "assets\music\music.mp3;." --onefile --windowed --icon=assets\img\icon.ico app\zovblox.py
+# все временные файлы после удалите

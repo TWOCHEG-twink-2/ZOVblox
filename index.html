@@ -29,9 +29,10 @@
 
             // Массив с путями к изображениям
             const images = [
-                'assets/img/zov_1.PNG',
+                'assets/img/zov_1.jpg',
                 'assets/img/zov_2.jpg',
-                'assets/img/zov_3.jpg'
+                'assets/img/zov_3.jpg',
+                'assets/img/zov_4.jpg'
             ];
 
             // Выбираем случайное изображение
@@ -185,6 +186,8 @@
             padding: 20px;
             width: 100%;
             box-sizing: border-box;
+            backdrop-filter: blur(40px); /* Эффект размытия фона */
+            -webkit-backdrop-filter: blur(40px); /* Для Safari */
             transition: box-shadow 0.3s ease;
         }
 
