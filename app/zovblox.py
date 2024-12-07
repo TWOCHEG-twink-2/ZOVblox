@@ -1,63 +1,99 @@
-import pygame
-import threading
+import os
+import sys
 import ctypes
-from win32con import SPI_SETDESKWALLPAPER, SPIF_UPDATEINIFILE, SPIF_SENDCHANGE
+import pygame
+import tkinter as tk
+from tkinter import messagebox
+import tempfile
+import shutil
+import random
 
 
-# Функция для смены обоев
-def change_wallpaper(wallpaper_path):
-    ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, wallpaper_path, SPIF_UPDATEINIFILE | SPIF_SENDCHANGE)
+# Функция для установки обоев
+def set_wallpaper(image_path):
+    # Windows API для изменения обоев
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, image_path, 3)
 
 
-# Функция для получения текущих обоев
-def get_current_wallpaper():
-    # Чтение текущего пути к обоям через реестр
-    import winreg
-    reg_key = r"Control Panel\Desktop"
-    reg_value = "Wallpaper"
-    try:
-        with winreg.OpenKey(winreg.HKEY_CURRENT_USER, reg_key) as key:
-            wallpaper_path, _ = winreg.QueryValueEx(key, reg_value)
-        return wallpaper_path
-    except Exception as e:
-        print(f"ошибка...: {e}")
-        return None
+# Функция для возврата обоев в исходное состояние
+def reset_wallpaper(original_wallpaper):
+    ctypes.windll.user32.SystemParametersInfoW(20, 0, original_wallpaper, 3)
 
 
-# Функция для воспроизведения музыки
-def play_music(music_file):
+# Функция для воспроизведения музыки в цикле
+def play_music(music_path):
     pygame.mixer.init()
-    pygame.mixer.music.load(music_file)
-    pygame.mixer.music.play()
+    pygame.mixer.music.load(music_path)
+    pygame.mixer.music.play(-1)  # -1 означает зацикливание музыки
 
 
-# Основная логика
-def main():
-    original_wallpaper = get_current_wallpaper()
-    if not original_wallpaper:
-        print("ошибка...")
-        return
-
-    new_wallpaper = "img.PNG"
-    music_file = "modules/music.mp3"
-
-    # Сменить обои на новые
-    change_wallpaper(new_wallpaper)
-
-    # Запустить музыку в отдельном потоке
-    music_thread = threading.Thread(target=play_music, args=(music_file,))
-    music_thread.start()
-
-    # Ждем, пока пользователь не нажмет Enter или не закроет консоль
-    input("ZZZZZZZZZZZZZZZ")
-
-    # Восстановить обои
-    if original_wallpaper:
-        change_wallpaper(original_wallpaper)
-
-    # Остановить музыку
+# Функция для остановки музыки
+def stop_music():
     pygame.mixer.music.stop()
 
 
+# Функция для извлечения файлов из встроенного архива
+def extract_resource(file_name):
+    # Получаем путь к временной папке, где хранятся ресурсы при запуске .exe
+    resource_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    file_path = os.path.join(resource_path, file_name)
+    return file_path
+
+
+# Функция для отображения окна с кнопкой
+def show_window():
+    root = tk.Tk()
+    root.title("ZOVblox")
+
+    # Настроим окно так, чтобы оно не было растягиваемым
+    root.geometry("600x200")
+    root.resizable(False, False)
+
+    # Добавим текст
+    label = tk.Label(root, text="ZOVblox к сожалению не готов\n(и некогда не будет)\nмогу предложить только это", font=("Arial", 12))
+    label.pack(pady=20)
+
+    # Кнопка для завершения
+    button = tk.Button(root, text="ну ладно(", font=("Arial", 12), command=root.quit)
+    button.pack(pady=10)
+
+    # Ожидание закрытия окна
+    root.mainloop()
+
+
+# Основная функция
+def main(image_filenames, music_filename):
+    # Случайный выбор изображения для обоев
+    chosen_image_filename = random.choice(image_filenames)
+
+    # Извлекаем путь к встроенным файлам
+    image_path = extract_resource(chosen_image_filename)
+    music_path = extract_resource(music_filename)
+
+    # Сохраняем текущие обои
+    original_wallpaper_path = os.path.expanduser("~\\AppData\\Roaming\\Microsoft\\Windows\\Themes\\TranscodedWallpaper")
+    original_wallpaper = None
+    if os.path.exists(original_wallpaper_path):
+        # Сохраняем текущие обои, чтобы восстановить их позже
+        original_wallpaper = tempfile.mktemp(suffix=".jpg")
+        shutil.copy(original_wallpaper_path, original_wallpaper)
+
+    # Устанавливаем новые обои и начинаем воспроизведение музыки
+    set_wallpaper(image_path)
+    play_music(music_path)
+
+    # Показываем окно с кнопкой и ждем его закрытия
+    show_window()
+
+    # После закрытия окна восстанавливаем старые обои и останавливаем музыку
+    if original_wallpaper:
+        reset_wallpaper(original_wallpaper)
+    stop_music()
+
+
 if __name__ == "__main__":
-    main()
+    # Укажите имена файлов с изображениями и музыкой, которые будут встраиваться в .exe
+    image_filenames = ["zov_1.PNG", "zov_2.jpg", "zov_3.jpg"]  # Имена файлов с изображениями
+    music_filename = "music.mp3"  # Имя файла с музыкой
+
+    main(image_filenames, music_filename)
