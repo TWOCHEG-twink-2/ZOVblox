@@ -2,322 +2,55 @@
     <meta charset="UTF-8">
     <link rel="icon" href="assets/img/icon.ico" type="image/x-icon">
     <title>ZOVblox</title>
-    <script>
-        async function loadMarkdown(sectionId, filePath) {
-            try {
-                const response = await fetch(filePath);
-                if (!response.ok) {
-                    throw new Error(`Не удалось загрузить файл ${filePath}`);
-                }
-                const text = await response.text();
-                const markedContent = marked.parse(text); // Используется библиотека marked.js
-                document.getElementById(sectionId).innerHTML = markedContent;
-            } catch (error) {
-                console.error(error);
-                document.getElementById(sectionId).innerText = 'Ошибка загрузки содержимого.';
-            }
-        }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            // Загрузка markdown содержимого
-            loadMarkdown('section1', 'assets/content/section1.md');
-            loadMarkdown('section2', 'assets/content/section2.md');
-            loadMarkdown('section3', 'assets/content/section3.md');
-            loadMarkdown('section4', 'assets/content/section4.md');
-            loadMarkdown('section5', 'assets/content/section5.md');
-            loadMarkdown('section6', 'assets/content/section6.md');
-
-            // Массив с путями к изображениям
-            const images = [
-                'assets/img/zov_1.jpg',
-                'assets/img/zov_2.jpg',
-                'assets/img/zov_3.jpg',
-                'assets/img/zov_4.jpg'
-            ];
-
-            // Выбираем случайное изображение
-            const randomImage = images[Math.floor(Math.random() * images.length)];
-
-            // Находим элемент header и применяем случайное изображение в качестве фона
-            document.querySelector('header').style.setProperty('--background-image', `url(${randomImage})`);
-        });
-
-        async function loadContributors() {
-            const repoUrl = "https://api.github.com/repos/TWOCHEG/ZOVblox/contributors";
-            const contributorsElement = document.getElementById("contributors");
-
-            try {
-                const response = await fetch(repoUrl);
-                if (!response.ok) {
-                    throw new Error("Не удалось загрузить авторов.");
-                }
-
-                const contributors = await response.json();
-                if (!contributors || contributors.length === 0) {
-                    contributorsElement.innerHTML = "<p>Авторы не найдены.</p>";
-                    return;
-                }
-
-                // Создание карточек для каждого автора
-                const contributorHTML = contributors.map(contributor => `
-                    <div class="contributor-card">
-                        <img src="${contributor.avatar_url}" alt="${contributor.login}" class="avatar">
-                        <div class="contributor-info">
-                            <a href="${contributor.html_url}" target="_blank" class="contributor-name">${contributor.login}</a>
-                            <p class="contributor-description">${contributor.contributions} коммит(ов)</p>
-                        </div>
-                    </div>
-                `).join("");
-
-                contributorsElement.innerHTML = `
-                    <div class="contributor-grid">
-                        ${contributorHTML}
-                    </div>
-                `;
-            } catch (error) {
-                console.error(error);
-                contributorsElement.innerHTML = "<p>Ошибка загрузки авторов.</p>";
-            }
-        }
-
-        async function loadFooter(footerId, footerPath) {
-            try {
-                const response = await fetch(footerPath);
-                if (!response.ok) {
-                    throw new Error(`Не удалось загрузить файл ${footerPath}`);
-                }
-                const footerContent = await response.text();
-                document.getElementById(footerId).innerHTML = footerContent;
-
-                // После загрузки футера вызываем loadContributors
-                loadContributors();
-            } catch (error) {
-                console.error(error);
-                document.getElementById(footerId).innerText = 'Ошибка загрузки футера.' + error;
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            loadFooter('footer', 'templates/footer.html');
-        });
-    </script>
-    
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to bottom, rgba(255, 220, 200, 1), rgba(255, 200, 200, 1));
-            color: #333;
-        }
-
-        /* Декоративная платформа для header */
-        .header-platform {
-            display: inline-block;
-            background-color: rgba(255, 255, 255, 0.1); /* Цвет фона */
-            border: 1px solid rgba(200, 200, 200, 0.1);
-            border-radius: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding-top: 40px;
-            padding-bottom: 40px;
-            padding-left: 100px;
-            padding-right: 100px;
-            width: auto;
-            position: relative;
-            z-index: 2;
-            backdrop-filter: blur(40px); /* Эффект размытия фона */
-            -webkit-backdrop-filter: blur(40px); /* Для Safari */
-        }
-
-        header {
-            position: relative;
-            text-align: center;
-            color: white;
-            overflow: hidden;
-            padding-top: 40px;
-            padding-bottom: 40px;
-        }
-
-        header h1 {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-            position: relative;
-            z-index: 3; /* Заголовок должен быть на слое поверх платформы */
-            font-size: 2.5rem;
-            margin: 0;
-            padding: 20px;
-        }
-
-        header p {
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-            position: relative;
-            z-index: 3; /* Текст должен быть на слое поверх платформы */
-            font-size: 1.5rem;
-            margin: 0;
-            padding-bottom: 40px;
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 300px;
-            background: var(--background-image) no-repeat center;
-            background-size: cover;
-            filter: blur(4px);
-            z-index: 1; /* Фон с изображением должен быть под платформой */
-            transform: translateY(0);
-            animation: float 5s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        main {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            flex-wrap: wrap;
-        }
-
-        .content-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-width: 300px;
-            max-width: 800px;
-        }
-
-        .video-column {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            min-width: 300px;
-            max-width: 800px;
-            background-color: rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 10px 0;
-            padding: 20px;
-            box-sizing: border-box;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .video-column:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .video-container {
-            width: 100%;
-            max-width: 600px;
-            margin-bottom: 20px;
-        }
-
-        .video-container video {
-            width: 100%;
-            border-radius: 8px;
-        }
-
-        .video-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        section {
-            background-color: rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin: 10px 0;
-            padding: 20px;
-            width: 100%;
-            box-sizing: border-box;
-            backdrop-filter: blur(40px); /* Эффект размытия фона */
-            -webkit-backdrop-filter: blur(40px); /* Для Safari */
-            transition: box-shadow 0.3s ease;
-        }
-
-        section:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .download-button {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(200, 200, 200, 1));
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            color: black;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            border: none;
-            border-radius: 10px;
-            text-align: center;
-            position: relative;
-            z-index: 3;
-            margin-top: 40px;
-            transition: filter 0.3s ease;
-        }
-
-        .download-button:hover {
-            filter: brightness(80%);
-        }
-    </style>
+    <!-- Подключаем скрипты -->
+    <script src="templates/scripts.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Подключаем стили -->
+    <link rel="stylesheet" href="templates/styles.css">
 </head>
 
-<header>
-    <div class="header-platform">
-        <h1>ZOVblox</h1>
-        <p>наш конкурент Roblox</p>
-        <a class="download-button" href="https://github.com/TWOCHEG/ZOVblox/releases" target="_blank">Скачать ZOVblox (Windows)</a>
-    </div>
-</header>
-
-<main>
-    <div class="content-column">
-        <section id="section1">
-            <div>Загрузка содержимого...</div>
-        </section>
-        <section id="section2">
-            <div>Загрузка содержимого...</div>
-        </section>
-        <section id="section3">
-            <div>Загрузка содержимого...</div>
-        </section>
-        <section id="section4">
-            <div>Загрузка содержимого...</div>
-        </section>
-        <section id="section5">
-            <div>Загрузка содержимого...</div>
-        </section>
-        <section id="section6">
-            <div>Загрузка содержимого...</div>
-        </section>
-    </div>
-
-    <div class="video-column">
-        <div class="video-title">Видео 1</div>
-        <div class="video-container">
-            <video controls>
-                <source src="assets/video/zovblox_1.mp4" type="video/mp4">
-                Ваш браузер не поддерживает видео.
-            </video>
+<body>
+    <header>
+        <div class="header-platform">
+            <h1>ZOVblox</h1>
+            <p>наш конкурент Roblox</p>
+            <a class="download-button" href="https://github.com/TWOCHEG/ZOVblox/releases" target="_blank">Скачать ZOVblox (Windows)</a>
         </div>
-    </div>
-</main>
+    </header>
 
-<div id="footer"></div>
+    <main>
+        <div class="content-column">
+            <section id="section1">
+                <div>Загрузка содержимого...</div>
+            </section>
+            <section id="section2">
+                <div>Загрузка содержимого...</div>
+            </section>
+            <section id="section3">
+                <div>Загрузка содержимого...</div>
+            </section>
+            <section id="section4">
+                <div>Загрузка содержимого...</div>
+            </section>
+            <section id="section5">
+                <div>Загрузка содержимого...</div>
+            </section>
+            <section id="section6">
+                <div>Загрузка содержимого...</div>
+            </section>
+        </div>
 
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+        <div class="video-column">
+            <div class="video-title">Видео 1</div>
+            <div class="video-container">
+                <video controls>
+                    <source src="assets/video/zovblox_1.mp4" type="video/mp4">
+                    Ваш браузер не поддерживает видео.
+                </video>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer"></div>
+</body>

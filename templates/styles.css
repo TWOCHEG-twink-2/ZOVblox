@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, rgba(255, 220, 200, 1), rgba(255, 200, 200, 1));
+    color: #333;
+}
+
+/* Декоративная платформа для header */
+.header-platform {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.1); /* Цвет фона */
+    border: 1px solid rgba(200, 200, 200, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 100px;
+    padding-right: 100px;
+    width: auto;
+    position: relative;
+    z-index: 2;
+    backdrop-filter: blur(40px); /* Эффект размытия фона */
+    -webkit-backdrop-filter: blur(40px); /* Для Safari */
+}
+
+header {
+    position: relative;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+header h1 {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 3; /* Заголовок должен быть на слое поверх платформы */
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 20px;
+}
+
+header p {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 3; /* Текст должен быть на слое поверх платформы */
+    font-size: 1.5rem;
+    margin: 0;
+    padding-bottom: 40px;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background: var(--background-image) no-repeat center;
+    background-size: cover;
+    filter: blur(4px);
+    z-index: 1; /* Фон с изображением должен быть под платформой */
+    transform: translateY(0);
+    animation: float 5s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.content-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 300px;
+    max-width: 800px;
+}
+
+.video-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 300px;
+    max-width: 800px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+}
+
+.video-column:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.video-container {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.video-container video {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.video-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+section {
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    backdrop-filter: blur(40px); /* Эффект размытия фона */
+    -webkit-backdrop-filter: blur(40px); /* Для Safari */
+    transition: box-shadow 0.3s ease;
+}
+
+section:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.download-button {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(200, 200, 200, 1));
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: black;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    z-index: 3;
+    margin-top: 40px;
+    transition: filter 0.3s ease;
+}
+
+.download-button:hover {
+    filter: brightness(80%);
+}
