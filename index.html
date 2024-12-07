@@ -18,12 +18,26 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
+            // Загрузка markdown содержимого
             loadMarkdown('section1', 'assets/content/section1.md');
             loadMarkdown('section2', 'assets/content/section2.md');
             loadMarkdown('section3', 'assets/content/section3.md');
             loadMarkdown('section4', 'assets/content/section4.md');
             loadMarkdown('section5', 'assets/content/section5.md');
             loadMarkdown('section6', 'assets/content/section6.md');
+
+            // Массив с путями к изображениям
+            const images = [
+                'assets/img/zov_1.PNG',
+                'assets/img/zov_2.jpg',
+                'assets/img/zov_3.jpg'
+            ];
+
+            // Выбираем случайное изображение
+            const randomImage = images[Math.floor(Math.random() * images.length)];
+
+            // Находим элемент header и применяем случайное изображение в качестве фона
+            document.querySelector('header').style.setProperty('--background-image', `url(${randomImage})`);
         });
     </script>
     <style>
@@ -53,7 +67,6 @@
             backdrop-filter: blur(40px); /* Эффект размытия фона */
             -webkit-backdrop-filter: blur(40px); /* Для Safari */
         }
-
 
         header {
             position: relative;
@@ -89,7 +102,7 @@
             left: 0;
             width: 100%;
             height: 250px;
-            background: url('assets/img/zov.PNG') no-repeat center;
+            background: var(--background-image) no-repeat center;
             background-size: cover;
             filter: blur(4px);
             z-index: 1; /* Фон с изображением должен быть под платформой */
