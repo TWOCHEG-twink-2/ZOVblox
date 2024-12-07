@@ -9,7 +9,7 @@ async function loadMarkdown(sectionId, filePath) {
         document.getElementById(sectionId).innerHTML = markedContent;
     } catch (error) {
         console.error(error);
-        document.getElementById(sectionId).innerText = 'Ошибка загрузки содержимого.';
+        document.getElementById(sectionId).innerText = 'Ошибка загрузки содержимого: ' + error;
     }
 }
 
