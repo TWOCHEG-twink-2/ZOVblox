@@ -41,6 +41,25 @@
             // Находим элемент header и применяем случайное изображение в качестве фона
             document.querySelector('header').style.setProperty('--background-image', `url(${randomImage})`);
         });
+
+        async function loadFooter(footerId, footerPath) {
+            try {
+                const response = await fetch(footerPath);
+                if (!response.ok) {
+                    throw new Error(`Не удалось загрузить файл ${footerPath}`);
+                }
+                const footerContent = await response.text();
+                document.getElementById(footerId).innerHTML = footerContent;
+            } catch (error) {
+                console.error(error);
+                document.getElementById(footerId).innerText = 'Ошибка загрузки футера.' + error;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            loadFooter('footer', 'templates/footer.html');
+        });
+
     </script>
     <style>
         body {
@@ -257,5 +276,7 @@
         </div>
     </div>
 </main>
+
+<div id="footer"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
