@@ -15,19 +15,19 @@ async function loadMarkdown(sectionId, filePath) {
 
 document.addEventListener("DOMContentLoaded", () => {
     // Загрузка markdown содержимого
-    loadMarkdown('section1', '../assets/content/section1.md');
-    loadMarkdown('section2', '../assets/content/section2.md');
-    loadMarkdown('section3', '../assets/content/section3.md');
-    loadMarkdown('section4', '../assets/content/section4.md');
-    loadMarkdown('section5', '../assets/content/section5.md');
-    loadMarkdown('section6', '../assets/content/section6.md');
+    loadMarkdown('section1', 'assets/content/section1.md');
+    loadMarkdown('section2', 'assets/content/section2.md');
+    loadMarkdown('section3', 'assets/content/section3.md');
+    loadMarkdown('section4', 'assets/content/section4.md');
+    loadMarkdown('section5', 'assets/content/section5.md');
+    loadMarkdown('section6', 'assets/content/section6.md');
 
     // Массив с путями к изображениям
     const images = [
-        '../assets/img/zov_1.jpg',
-        '../assets/img/zov_2.jpg',
-        '../assets/img/zov_3.jpg',
-        '../assets/img/zov_4.jpg'
+        'assets/img/zov_1.jpg',
+        'assets/img/zov_2.jpg',
+        'assets/img/zov_3.jpg',
+        'assets/img/zov_4.jpg'
     ];
 
     // Выбираем случайное изображение
@@ -93,5 +93,5 @@ async function loadFooter(footerId, footerPath) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadFooter('footer', 'templates/footer.html');
+    loadFooter('footer', 'footer.html');
 });
