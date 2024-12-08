@@ -1,5 +1,3 @@
-const basePath = "";
-
 async function loadMarkdown(sectionId, filePath) {
     try {
         const response = await fetch(filePath);

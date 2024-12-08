@@ -1,5 +1,3 @@
-const basePath = "/ZOVblox";
-
 async function loadContributors() {
     const repoUrl = "https://api.github.com/repos/TWOCHEG/ZOVblox/contributors";
     const contributorsElement = document.getElementById("contributors");
