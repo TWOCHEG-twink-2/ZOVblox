@@ -14,8 +14,8 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding-top: 40px;
     padding-bottom: 40px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
     width: auto;
     position: relative;
     z-index: 2;
@@ -171,12 +171,6 @@ section:hover {
 
 /* Для мобильных устройств */
 @media (max-width: 768px) {
-    .header-platform {
-        padding: 20px;
-        width: 90%;
-        margin: 0 auto;
-    }
-
     header h1 {
         font-size: 1.8rem;
     }
@@ -197,11 +191,6 @@ section:hover {
     }
 
     .content-column,
-    .video-column {
-        min-width: auto;
-        max-width: 100%;
-        padding: 10px;
-    }
 
     .video-container {
         max-width: 100%;
