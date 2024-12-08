@@ -9,7 +9,6 @@ body {
 /* Декоративная платформа для header */
 .header-platform {
     display: inline-block;
-    background-color: rgba(255, 255, 255, 0.1); /* Цвет фона */
     border: 1px solid rgba(200, 200, 200, 0.1);
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
