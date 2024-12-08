@@ -33,8 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Выбираем случайное изображение
     const randomImage = images[Math.floor(Math.random() * images.length)];
 
-    console.error(randomImage);
-
     // Находим элемент header и применяем случайное изображение в качестве фона
     document.querySelector('header').style.setProperty('--background-image', `url(${randomImage})`);
 });
