@@ -1,3 +1,5 @@
+const basePath = "/ZOVblox";
+
 async function loadContributors() {
     const repoUrl = "https://api.github.com/repos/TWOCHEG/ZOVblox/contributors";
     const contributorsElement = document.getElementById("contributors");
@@ -54,5 +56,5 @@ async function loadFooter(footerId, footerPath) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadFooter('footer', '/templates/footer.html');
+    loadFooter('footer', '/ZOVblox/templates/footer.html');
 });
