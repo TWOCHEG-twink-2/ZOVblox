@@ -24,14 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Массив с путями к изображениям
     const images = [
-        '/assets/img/zov_1.jpg',
-        '/assets/img/zov_2.jpg',
-        '/assets/img/zov_3.jpg',
-        '/assets/img/zov_4.jpg'
+        'assets/img/zov_1.jpg',
+        'assets/img/zov_2.jpg',
+        'assets/img/zov_3.jpg',
+        'assets/img/zov_4.jpg'
     ];
 
     // Выбираем случайное изображение
     const randomImage = images[Math.floor(Math.random() * images.length)];
+
+    console.error(randomImage);
 
     // Находим элемент header и применяем случайное изображение в качестве фона
     document.querySelector('header').style.setProperty('--background-image', `url(${randomImage})`);
