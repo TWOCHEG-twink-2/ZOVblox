@@ -169,3 +169,67 @@ section:hover {
 .download-button:hover {
     filter: brightness(80%);
 }
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .header-platform {
+        padding: 20px;
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header p {
+        font-size: 1.2rem;
+    }
+
+    .download-button {
+        padding: 8px 16px;
+        font-size: 1rem;
+    }
+
+    main {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .content-column,
+    .video-column {
+        min-width: auto;
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    .video-container {
+        max-width: 100%;
+    }
+
+    section {
+        margin: 10px 0;
+        padding: 15px;
+    }
+
+    .video-title {
+        font-size: 1rem;
+    }
+}
+
+/* Для очень маленьких устройств (телефоны) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    header p {
+        font-size: 1rem;
+    }
+
+    .download-button {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+}
