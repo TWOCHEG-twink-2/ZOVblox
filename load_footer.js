@@ -54,5 +54,5 @@ async function loadFooter(footerId, footerPath) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadFooter('footer', '/ZOVblox/templates/footer.html');
+    loadFooter('footer', 'templates/footer.html');
 });
