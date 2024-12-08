@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Массив с путями к изображениям
     const images = [
-        'assets/img/zov_1.jpg',
-        'assets/img/zov_2.jpg',
-        'assets/img/zov_3.jpg',
-        'assets/img/zov_4.jpg'
+        '/assets/img/zov_1.jpg',
+        '/assets/img/zov_2.jpg',
+        '/assets/img/zov_3.jpg',
+        '/assets/img/zov_4.jpg'
     ];
 
     // Выбираем случайное изображение
