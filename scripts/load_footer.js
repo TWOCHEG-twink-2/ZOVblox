@@ -39,7 +39,7 @@ async function loadContributors() {
         `;
     } catch (error) {
         console.error(error);
-        contributorsElement.innerHTML = "<p>Ошибка загрузки авторов.</p>";
+        contributorsElement.innerHTML = "<p>ошибка загрузки авторов</p>";
     }
 }
 
