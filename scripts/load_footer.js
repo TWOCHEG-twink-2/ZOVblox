@@ -25,10 +25,10 @@ async function loadContributors() {
             </div>
         `).join("");
 
+        // тут короче пришлось в ручную карту сделать потому что его нету на гит хабе
         contributorsElement.innerHTML = `
             <div class="contributor-grid">
                 ${contributorHTML}
-                // тут короче пришлось в ручную сделать потому что его нету на гит хабе
                 <div class="contributor-card">
                     <img src="https://cs6.pikabu.ru/post_img/big/2015/08/03/6/1438593490_2019547442.png" alt="егор" class="avatar">
                     <div class="contributor-info">
