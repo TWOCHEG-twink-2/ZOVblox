@@ -2,25 +2,23 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, rgba(255, 220, 200, 1), rgba(255, 200, 200, 1));
+    background: linear-gradient(to bottom, rgba(240, 240, 240, 1), rgba(200, 200, 200, 1));
     color: #333;
 }
 
 /* Декоративная платформа для header */
 .header-platform {
     display: inline-block;
-    border: 1px solid rgba(200, 200, 200, 0.1);
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(200, 200, 200, 0.1);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
     padding-top: 40px;
     padding-bottom: 40px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
     width: auto;
     position: relative;
     z-index: 2;
     backdrop-filter: blur(40px); /* Эффект размытия фона */
-    -webkit-backdrop-filter: blur(40px); /* Для Safari */
 }
 
 header {
@@ -102,9 +100,10 @@ main {
     min-width: 300px;
     max-width: 800px;
     background-color: rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border: 2px solid #CFCFCF;
+    background: linear-gradient(to bottom, rgba(240, 240, 240, 1), rgba(220, 220, 220, 1));
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(40px); /* Эффект размытия фона */
     margin: 10px 0;
     padding: 20px;
     box-sizing: border-box;
@@ -123,7 +122,6 @@ main {
 
 .media-container video {
     width: 100%;
-    border-radius: 8px;
 }
 
 .video-title {
@@ -132,16 +130,14 @@ main {
 }
 
 section {
-    background-color: rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    background: linear-gradient(to bottom, rgba(240, 240, 240, 1), rgba(220, 220, 220, 1));
+    border: 2px solid #CFCFCF;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 10px 0;
     padding: 20px;
     width: 100%;
     box-sizing: border-box;
     backdrop-filter: blur(40px); /* Эффект размытия фона */
-    -webkit-backdrop-filter: blur(40px); /* Для Safari */
     transition: box-shadow 0.3s ease;
 }
 
@@ -150,23 +146,22 @@ section:hover {
 }
 
 .download-button {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(200, 200, 200, 1));
+    background-color: rgba(220, 220, 220, 1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: black;
     padding: 10px 20px;
     font-size: 1.2rem;
     cursor: pointer;
-    border: none;
-    border-radius: 10px;
+    border: 2px solid #CFCFCF;
     text-align: center;
     position: relative;
     z-index: 3;
     margin-top: 40px;
-    transition: filter 0.3s ease;
+    transition: background-color 0.3s ease;
 }
 
 .download-button:hover {
-    filter: brightness(80%);
+    background-color: #CFCFCF;
 }
 
 /* Для мобильных устройств */
