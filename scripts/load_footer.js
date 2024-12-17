@@ -1,5 +1,5 @@
 async function loadContributors() {
-    const repoUrl = "https://api.github.com/repos/TWOCHEG/ZOVblox/contributors";
+    const repoUrl = "https://api.github.com/repos/TWOCHEG-twink-2/ZOVblox/contributors";
     const contributorsElement = document.getElementById("contributors");
 
     try {
