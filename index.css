@@ -104,9 +104,11 @@ main {
     background: linear-gradient(to bottom, rgba(240, 240, 240, 1), rgba(220, 220, 220, 1));
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(40px); /* Эффект размытия фона */
-    margin: 10px;
-    padding: 20px;
-    padding-bottom: 120px;
+    margin: 10px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     box-sizing: border-box;
     transition: box-shadow 0.3s ease;
 }
@@ -186,7 +188,9 @@ section:hover {
         padding: 10px;
     }
 
-    .content-column,
+    .media-column {
+        padding-bottom: 220px;
+    }
 
     .media-container {
         max-width: 100%;
@@ -204,6 +208,11 @@ section:hover {
 
 /* Для очень маленьких устройств (телефоны) */
 @media (max-width: 480px) {
+    .header-platform {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
     header h1 {
         font-size: 1.5rem;
     }
@@ -212,8 +221,12 @@ section:hover {
         font-size: 1rem;
     }
 
+    .media-column {
+        padding-bottom: 100px;
+    }
+
     .download-button {
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         padding: 6px 12px;
     }
 }
