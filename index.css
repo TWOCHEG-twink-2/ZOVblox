@@ -2,7 +2,10 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, rgba(220, 220, 220, 1), rgba(190, 190, 190, 1));
+    background:
+        radial-gradient(circle, rgba(160, 160, 160, 0.2) 1px, rgba(220, 220, 220, 0) 1px),
+        linear-gradient(to bottom, rgba(220, 220, 220, 1), rgba(190, 190, 190, 1));
+    background-size: 10px 10px, 100% 100%; /* Размер точек и градиента */
     color: #333;
 }
 
@@ -54,9 +57,9 @@ header::after {
     top: 0;
     left: 0;
     width: 100%;
-    height: 250px;
+    height: 300px;
     background: var(--background-image) no-repeat center;
-    background-size: cover;
+    background-size: 100% 100%;
     filter: blur(4px);
     z-index: 1; /* Фон с изображением должен быть под платформой */
     transform: translateY(0);
@@ -101,7 +104,7 @@ main {
     max-width: 800px;
     background-color: rgba(0, 0, 0, 0.1);
     border: 2px solid #CFCFCF;
-    background: linear-gradient(to bottom, rgba(240, 240, 240, 1), rgba(220, 220, 220, 1));
+    background: linear-gradient(to bottom, rgba(240, 240, 240, 0.5), rgba(220, 220, 220, 0.5));
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(40px); /* Эффект размытия фона */
     margin: 10px 0;
@@ -133,7 +136,7 @@ main {
 }
 
 section {
-    background: linear-gradient(to bottom, rgba(240, 240, 240, 1), rgba(220, 220, 220, 1));
+    background: linear-gradient(to bottom, rgba(240, 240, 240, 0.5), rgba(220, 220, 220, 0.5));
     border: 2px solid #CFCFCF;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin: 10px 0;
