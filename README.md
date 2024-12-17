@@ -1,6 +1,6 @@
 ## ZOVblox
 ### сайты
-- https://twocheg.github.io/ZOVblox/ (временно не работает)
+- https://twocheg.github.io/ZOVblox/ (не работает тк на аке офнули github actions)
 - доступный - https://twocheg-twink-2.github.io/ZOVblox/
 
 ### информация
