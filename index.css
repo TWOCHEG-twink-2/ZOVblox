@@ -121,12 +121,24 @@ main {
 }
 
 .media-container {
+    border-radius: 20px;
     width: 100%;
     max-width: 600px;
     margin-bottom: 20px;
 }
 
 .media-container video {
+    border-radius: 10px;
+    width: 100%;
+}
+
+.media-container img {
+    border-radius: 10px;
+    width: 100%;
+}
+
+.media-container embed {
+    border-radius: 10px;
     width: 100%;
 }
 
