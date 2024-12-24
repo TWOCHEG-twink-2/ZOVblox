@@ -33,7 +33,7 @@ async function loadContributors() {
                     <img src="https://cs6.pikabu.ru/post_img/big/2015/08/03/6/1438593490_2019547442.png" alt="егор" class="avatar">
                     <div class="contributor-info">
                         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" class="contributor-name">егор (нету на гит хабе)</a>
-                        <p class="contributor-description">52 коммит(ов)</p>
+                        <p class="contributor-description">1488 коммит(ов)</p>
                     </div>
                 </div>
             </div>
