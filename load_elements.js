@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadMarkdown('section4', 'assets/content/section4.md');
     loadMarkdown('section5', 'assets/content/section5.md');
     loadMarkdown('section6', 'assets/content/section6.md');
+    loadMarkdown('section7', 'assets/content/section7.md');
 
     // Массив с путями к изображениям
     const images = [
