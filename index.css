@@ -12,7 +12,6 @@ body {
 /* Декоративная платформа для header */
 .header-platform {
     display: inline-block;
-    border: 2px solid rgba(200, 200, 200, 0.1);
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
     padding-top: 40px;
     padding-bottom: 40px;
@@ -22,6 +21,7 @@ body {
     position: relative;
     z-index: 2;
     backdrop-filter: blur(40px); /* Эффект размытия фона */
+    border-radius: 10px;
 }
 
 header {
@@ -169,6 +169,7 @@ section:hover {
 }
 
 .download-button {
+    boeder-radius: 10px;
     background-color: rgba(220, 220, 220, 1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     color: black;
