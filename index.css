@@ -137,6 +137,11 @@ main {
     width: 100%;
 }
 
+.media-container iframe {
+    border-radius: 10px;
+    width: 100%;
+}
+
 .media-container embed {
     border-radius: 10px;
     width: 100%;
